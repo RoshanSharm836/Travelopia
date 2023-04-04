@@ -1,10 +1,8 @@
 const mongoose = require("mongoose");
-
+require("dotenv").config();
 mongoose.set("strictQuery", true);
 const connection = (mongoose.connection = async () => {
-  await mongoose.connect(
-    `mongodb+srv://fastresume:roshan123@cluster0.l1u6alu.mongodb.net/Travelopia`
-  );
+  await mongoose.connect(process.env.DataBase_url);
 });
 
 module.exports = connection;
