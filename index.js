@@ -1,13 +1,15 @@
 const express = require("express");
 const app = express();
-const connection = require("./db/config");
-const router = require("./router/data.model");
 var cors = require("cors");
 var path = require("path");
-
+const connection = require("./db/config");
+const router = require("./router/data.model");
 app.use(cors());
+
 app.use(express.json());
-app.use("/api", router);
+
+app.use("/api/", router);
+
 app.use(express.static(path.join(__dirname, "./frontend/build")));
 
 app.get("*", (_, res) => {
@@ -17,7 +19,8 @@ app.get("*", (_, res) => {
     }
   });
 });
-app.listen(3001, () => {
-  console.log("listening on port 3001");
+
+app.listen(3000, () => {
+  console.log("listening on port 3000");
   connection();
 });
